@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 3180621073777475945}
   - component: {fileID: 7600835543778111409}
   - component: {fileID: 5481622020689257867}
-  - component: {fileID: 8182163324682468218}
   - component: {fileID: 303897536366939138}
+  - component: {fileID: 8182163324682468218}
   m_Layer: 0
   m_Name: _GameManager
   m_TagString: Untagged
@@ -97,20 +97,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPool
   prefab: {fileID: 7633706156505524227, guid: e42acf19f85c8004a9cb8a89bab4051d, type: 3}
   initialSize: 20
---- !u!114 &8182163324682468218
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7155184628159752465}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba8ab1aac7d1ecf4886aaeebc5c00c40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ExperienceGemPool
-  prefab: {fileID: -9066028411276586579, guid: 82492881afeaaa549b14838435e5147e, type: 3}
-  initialSize: 20
 --- !u!114 &303897536366939138
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,4 +110,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectilePool
   prefab: {fileID: 8944325193500984403, guid: 080fa40d7fede9041bfb5994869632c3, type: 3}
+  initialSize: 20
+--- !u!114 &8182163324682468218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7155184628159752465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba8ab1aac7d1ecf4886aaeebc5c00c40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExperienceGemPool
+  prefab: {fileID: -9066028411276586579, guid: 82492881afeaaa549b14838435e5147e, type: 3}
   initialSize: 20
