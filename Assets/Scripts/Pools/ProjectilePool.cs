@@ -1,0 +1,1 @@
+﻿public class ProjectilePool : GenericObjectPool<Projectile> { }
