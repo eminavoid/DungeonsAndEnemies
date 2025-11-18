@@ -1,62 +1,44 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.InputSystem; // Necesario
 
-// Responsabilidad: Orquestar el disparo (cadencia, input) y apuntado.
 public class PlayerShooting : MonoBehaviour
 {
     [Header("Configuración de Disparo")]
-    [SerializeField]
-    private Transform firePoint; // El punto desde donde nacen los proyectiles
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private float fireRate = 10f;
 
-    [SerializeField]
-    [Tooltip("Disparos por segundo")]
-    private float fireRate = 10f; // 10 disparos por segundo
-
-    // --- Referencias Internas ---
+    // --- Referencias ---
     private Camera mainCamera;
-    private ProjectilePool projectilePool; // Nuestra dependencia (DIP)
+    private ProjectilePool projectilePool;
+    private PlayerInput playerInput; // <--- NUEVA REFERENCIA
+    private InputAction fireAction;  // <--- Para guardar la acción y no buscarla cada frame
 
-    // --- Estado Interno ---
-    private Vector2 lookInput;
-    private Vector2 aimDirection = Vector2.up; // Dirección de apuntado (default)
-    private bool isFiring = false;
+    // --- Estado ---
+    private Vector2 lookInput; // Este lo mantenemos por mensaje, el mouse siempre se mueve
+    private Vector2 aimDirection = Vector2.up;
     private float nextFireTime = 0f;
+
+    private void Awake() // Usamos Awake para inicializar referencias propias
+    {
+        playerInput = GetComponent<PlayerInput>();
+        // Cacheamos la acción "Fire" para optimizar
+        fireAction = playerInput.actions["Fire"];
+    }
 
     private void Start()
     {
-        // Cachear referencias es clave para el rendimiento.
-        // Evita Camera.main en Update() y usa el Singleton del Pool.
         mainCamera = Camera.main;
-
-        // Inyección de Dependencia simple usando el Singleton
         projectilePool = ProjectilePool.Instance;
-
-        if (projectilePool == null)
-        {
-            Debug.LogError("¡No se encontró ProjectilePool! Asegúrate de que existe en la escena.");
-        }
     }
 
-    // --- Métodos de Input (Llamados por Player Input "Send Messages") ---
-
-    // Esta función será llamada por el evento "Performed" (presionar)
-    public void OnFireStart()
-    {
-        isFiring = true;
-    }
-
-    // Esta función será llamada por el evento "Canceled" (soltar)
-    public void OnFireStop()
-    {
-        isFiring = false;
-    }
-
+    // --- Mantenemos OnLook (para la posición del mouse está bien el mensaje) ---
     public void OnLook(InputValue value)
     {
         lookInput = value.Get<Vector2>();
     }
 
-    // --- Lógica Principal ---
+    // --- BORRA EL MÉTODO OnFire ---
+    // Ya no lo necesitamos.
 
     private void Update()
     {
@@ -66,22 +48,10 @@ public class PlayerShooting : MonoBehaviour
 
     private void HandleAiming()
     {
-        // 1. Convertir la posición del mouse (Screen Space) a (World Space)
-        // Usamos ScreenToWorldPoint.
-        Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(
-            new Vector3(lookInput.x, lookInput.y, mainCamera.nearClipPlane)
-        );
-
-        // (En 2D, a menudo es más simple si la cámara es Ortográfica,
-        // pero esto funciona para ambas. Aseguramos Z=0)
-        // ¡Corrección! Para 2D Ortográfico es más simple:
         Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(lookInput);
-        mouseWorldPos.z = 0; // Estamos en 2D
-
-        // 2. Calcular la dirección desde el jugador hacia el mouse
+        mouseWorldPos.z = 0;
         aimDirection = (mouseWorldPos - transform.position).normalized;
 
-        // Opcional: Rotar el "firePoint" para que mire hacia el mouse
         if (firePoint != null)
         {
             float angle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg;
@@ -91,32 +61,23 @@ public class PlayerShooting : MonoBehaviour
 
     private void HandleShooting()
     {
-        // Si el jugador está disparando Y ha pasado el tiempo de espera
+        // AQUÍ ESTÁ LA MAGIA:
+        // Preguntamos directamente a la acción: "¿Estás presionada?"
+        bool isFiring = fireAction.IsPressed();
+
         if (isFiring && Time.time >= nextFireTime)
         {
-            // 1. Actualizar el tiempo para el próximo disparo
             nextFireTime = Time.time + (1f / fireRate);
 
-            // 2. Determinar la posición de spawn
-            Vector3 spawnPosition = firePoint != null ? firePoint.position : transform.position;
-
-            // 3. ¡Pedir un proyectil al Pool! (Cero 'Instantiate')
             GameObject projectileGO = projectilePool.Get();
 
-            // 4. Posicionar el proyectil
+            Vector3 spawnPosition = firePoint != null ? firePoint.position : transform.position;
             projectileGO.transform.position = spawnPosition;
 
-            // 5. Inicializar el proyectil (decirle a dónde ir)
-            // Esto usa GetComponent, lo cual es aceptable aquí porque
-            // solo ocurre al disparar, no cada frame.
             Projectile projectileScript = projectileGO.GetComponent<Projectile>();
             if (projectileScript != null)
             {
                 projectileScript.Initialize(projectilePool, aimDirection);
-            }
-            else
-            {
-                Debug.LogError("¡El Prefab del proyectil no tiene el script 'Projectile'!");
             }
         }
     }
