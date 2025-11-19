@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "D&D/Abilities/Debug Test")]
+[CreateAssetMenu(menuName = "DnD/Abilities/Debug Test")]
 public class TestAbility : Ability
 {
     [Header("Configuración de Debug")]

@@ -8,12 +8,15 @@ public class Projectile : MonoBehaviour
     private Vector2 moveDirection;
     private float lifeTimer;
 
+    private int damageToDeal;
+
     // Ya no necesitamos pasar la referencia del pool en Initialize, 
     // usaremos el Singleton estático al morir.
-    public void Initialize(Vector2 direction)
+    public void Initialize(Vector2 direction, int damage)
     {
         this.moveDirection = direction.normalized;
         this.lifeTimer = lifeTime;
+        this.damageToDeal = damage;
     }
 
     private void Update()
@@ -29,7 +32,8 @@ public class Projectile : MonoBehaviour
         IDamageable damageable = other.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            damageable.TakeDamage(1);
+            // Usamos el valor dinámico
+            damageable.TakeDamage(damageToDeal);
             ReleaseToPool();
         }
     }

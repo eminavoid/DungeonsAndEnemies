@@ -2309,38 +2309,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2145822789}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2105887503 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5236079577893412394, guid: acde7a508440b56458634bcfb33ee67b, type: 3}
-  m_PrefabInstance: {fileID: 2846780354282185155}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2105887510
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2105887503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c3d18488bb6b7d4282f21148e0a7598, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerAbilityController
-  activeAbility: {fileID: 11400000, guid: 39c7563c64b3e0941a9f6fa106a6073d, type: 2}
---- !u!114 &2105887511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2105887503}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17f407f174081344aaf1a4623ee465be, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
-  baseHealth: 100
-  baseMoveSpeed: 19.02
 --- !u!1 &2143129769
 GameObject:
   m_ObjectHideFlags: 0
@@ -2668,13 +2636,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 111075869249361965, guid: acde7a508440b56458634bcfb33ee67b, type: 3}
-      propertyPath: moveSpeed
+    - target: {fileID: 5028906566504873963, guid: acde7a508440b56458634bcfb33ee67b, type: 3}
+      propertyPath: baseMoveSpeed
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5236079577893412394, guid: acde7a508440b56458634bcfb33ee67b, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361908843619454275, guid: acde7a508440b56458634bcfb33ee67b, type: 3}
+      propertyPath: baseDamage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361908843619454275, guid: acde7a508440b56458634bcfb33ee67b, type: 3}
+      propertyPath: baseFireRate
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486836183646463847, guid: acde7a508440b56458634bcfb33ee67b, type: 3}
+      propertyPath: debugItemToEquip
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8175918400605378403, guid: acde7a508440b56458634bcfb33ee67b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2719,13 +2699,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5236079577893412394, guid: acde7a508440b56458634bcfb33ee67b, type: 3}
-      insertIndex: 5
-      addedObject: {fileID: 2105887511}
-    - targetCorrespondingSourceObject: {fileID: 5236079577893412394, guid: acde7a508440b56458634bcfb33ee67b, type: 3}
-      insertIndex: 6
-      addedObject: {fileID: 2105887510}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acde7a508440b56458634bcfb33ee67b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

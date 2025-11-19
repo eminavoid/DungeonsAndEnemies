@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8c19d2bb82264184eabc619e9d9ddc48, type: 3}
-  m_Name: a
+  m_Name: Ability_Test
   m_EditorClassIdentifier: Assembly-CSharp::TestAbility
-  abilityName: 
-  cooldownTime: 3
+  abilityName: Test ability
+  cooldownTime: 10
   manaCost: 2
   message: "\xA1Habilidad Activada!"
   logColor: {r: 0, g: 1, b: 0, a: 1}

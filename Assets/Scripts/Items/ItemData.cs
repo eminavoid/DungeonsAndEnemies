@@ -1,29 +1,28 @@
-﻿// ItemData.cs
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections.Generic;
 
-public enum EquipmentSlot { Helm, Armor, Boots, Necklace, Ring, MainHand, OffHand }
+// Estructura auxiliar para definir "Qué stat" y "Cuánto"
+[System.Serializable]
+public struct StatBonus
+{
+    public StatType statType;
+    public float amount;
+}
 
-[CreateAssetMenu(fileName = "New Item", menuName = "D&D Roguelike/Item")]
+[CreateAssetMenu(fileName = "Item_", menuName = "DnD/Item")]
 public class ItemData : ScriptableObject
 {
-    [Header("Info")]
+    [Header("Visuales")]
     public string itemName;
     public Sprite icon;
     public EquipmentSlot slot;
 
-    [Header("Stats (Dejar en 0 si no aplica)")]
-    public int strengthBonus;
-    public int dexterityBonus;
-    public int constitutionBonus;
-    public int intelligenceBonus;
-    public int wisdomBonus;
-    public int charismaBonus;
+    [Header("Bonificaciones")]
+    // Una lista es mucho más limpia que tener 20 variables public int str, dex, con...
+    // Puedes agregar tantos bonos como quieras en el inspector.
+    public List<StatBonus> statBonuses;
 
-    [Header("Otros Bonus")]
-    public int defenseBonus; // Armadura plana
-    public int moveSpeedBonus;
-
-    [Header("Especial")]
-    // Si es arma, aquí va el prefab del proyectil
+    [Header("Especial (Armas/Activos)")]
     public GameObject projectilePrefab;
+    // public Ability abilityToGrant; // Para el futuro
 }
