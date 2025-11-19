@@ -2326,7 +2326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3d18488bb6b7d4282f21148e0a7598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAbilityController
-  activeAbility: {fileID: 0}
+  activeAbility: {fileID: 11400000, guid: 39c7563c64b3e0941a9f6fa106a6073d, type: 2}
 --- !u!114 &2105887511
 MonoBehaviour:
   m_ObjectHideFlags: 0
