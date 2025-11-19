@@ -63,7 +63,7 @@ public class DamagePopup : MonoBehaviour
             if (textColor.a <= 0)
             {
                 // Cuando es invisible, devolver al pool
-                DamagePopupManager.Instance.ReturnToPool(this);
+                DamagePopupPool.Instance.Release(this);
             }
         }
     }

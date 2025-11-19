@@ -50,7 +50,6 @@ public class LevelManager : MonoBehaviour
 
         CalculateNextLevelXp();
 
-        Debug.Log($"¡SUBIDA DE NIVEL! Nivel actual: {CurrentLevel}");
 
         // Avisar del Level Up
         OnLevelUp?.Invoke(CurrentLevel);

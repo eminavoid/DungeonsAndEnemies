@@ -30,7 +30,6 @@ public class ExperienceBarUI : MonoBehaviour
 
     private void UpdateBar(int currentXp, int requiredXp)
     {
-        // Convertir a valor 0.0 - 1.0
         float fillAmount = (float)currentXp / requiredXp;
         slider.value = fillAmount;
     }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class SimpleEnemy : MonoBehaviour, IDamageable
 {
@@ -6,6 +7,7 @@ public class SimpleEnemy : MonoBehaviour, IDamageable
     private int currentHealth;
     private Transform playerTarget;
 
+    public event Action<SimpleEnemy> OnEnemyDeath;
 
     public void Configure(EnemyData data)
     {
@@ -36,9 +38,9 @@ public class SimpleEnemy : MonoBehaviour, IDamageable
     {
         currentHealth -= damage;
 
-        if (DamagePopupManager.Instance != null)
+        if (DamagePopupPool.Instance != null)
         {
-            DamagePopupManager.Instance.ShowDamage(damage, transform.position);
+            DamagePopupPool.Create(transform.position, damage);
         }
 
         if (currentHealth <= 0)
@@ -49,14 +51,10 @@ public class SimpleEnemy : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        if (ExperienceGemPool.Instance != null)
-        {
-            // Nota: ExperienceGemPool.Instance.Get() devuelve una ExperienceGem ahora
-            var gem = ExperienceGemPool.Instance.Get();
-            gem.transform.position = transform.position;
-        }
+        // 1. Avisar a la sala (si alguien está escuchando)
+        OnEnemyDeath?.Invoke(this);
 
-        // Devolverse al pool usando 'this' (el componente), no gameObject
+        // 2. Devolver al Pool (Ya no soltamos gemas físicas)
         EnemyPool.Instance.Release(this);
     }
 }
