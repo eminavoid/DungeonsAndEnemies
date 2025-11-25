@@ -9,7 +9,7 @@ public class PlayerShooting : MonoBehaviour
 
 
     [SerializeField] private float baseDamage = 5f;
-    [SerializeField] private float baseFireRate = 5f;
+    [SerializeField] private float baseFireRate = 2f;
 
     private PlayerStats stats;
 
