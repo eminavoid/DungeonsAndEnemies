@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ClassData_Wizard
   m_EditorClassIdentifier: Assembly-CSharp::ClassData
   className: Wizard
-  description: 
-  icon: {fileID: 0}
+  description: Fireball
+  icon: {fileID: 21300000, guid: 9ea72647c24be493ba6f15a9cd2a24ae, type: 3}
   startingEquipment:
   - {fileID: 11400000, guid: 38a123171abe64d47af0bde8a6455f08, type: 2}
   - {fileID: 11400000, guid: 35432063b5c3f2d4f8c9eb3935f29857, type: 2}
